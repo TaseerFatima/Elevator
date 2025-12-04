@@ -12,14 +12,14 @@ const Floors = ({ currentFloor, direction, setCurrentFloor }) => {
   ];
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full max-w-4xl mx-auto p-4">
       {FLOORS.map((floor) => (
         <div
           key={floor.id}
-          className="relative bg-[#2D383e] rounded-xl shadow-md p-4 text-center"
+          className="relative bg-[#2D383e] rounded-xl border-2 border-gray-600 shadow-md p-[15px] text-center"
         >
-          <h2 className="text-lg font-bold text-white">{floor.name}</h2>
-          <p className="text-gray-400 mt-2">{floor.desc}</p>
+            <h3 className="font-bold text-lg md:text-base text-white">{floor.name}</h3>
+            <p className="text-xs md:text-sm text-gray-400">{floor.desc}</p>
           <ArrowControls
             currentFloor={currentFloor}
             setCurrentFloor={setCurrentFloor}

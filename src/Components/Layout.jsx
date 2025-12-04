@@ -5,69 +5,100 @@ import ElevatorButtons from "./ElevatorButtons";
 const Layout = () => {
   const [currentFloor, setCurrentFloor] = useState(1);
   const [direction, setDirection] = useState(null);
-  const [queue, setQueue] = useState([]);
-  // const [isMoving, setIsMoving] = useState(false);
+  const [upQueue, setUpQueue] = useState([]);
+  const [downQueue, setDownQueue] = useState([]);
 
   const Addtoqueue = (targetFloor) => {
-    setQueue((prev) => {
-      if (prev.includes(targetFloor)) return prev;
-      const newQueue = [...prev, targetFloor];
+    if (targetFloor > currentFloor) {
+      setUpQueue((prev) =>
+        prev.includes(targetFloor)
+          ? prev
+          : [...prev, targetFloor].sort((a, b) => a - b)
+      );
+    } else if (targetFloor < currentFloor) {
+      setDownQueue((prev) =>
+        prev.includes(targetFloor)
+          ? prev
+          : [...prev, targetFloor].sort((a, b) => b - a)
+      );
+    }
 
-      let effectiveDirection = direction ;
-      if (!direction){
-        effectiveDirection = targetFloor > currentFloor ? "up" : "down";
-        setDirection(effectiveDirection);
-      }
-
-      if (effectiveDirection === "up"){
-        return newQueue.sort((a,b)=> a - b);
-      }else
-        return newQueue.sort((a,b)=> b - a);
-    });
+    if (!direction) {
+      setDirection(targetFloor > currentFloor ? "up" : "down");
+    }
   };
 
-
-   
   useEffect(() => {
-    if (queue.length === 0) return;
-
     const move = () => {
-      setCurrentFloor((prev) => {
-        const target = queue[0];
+      if (direction === "up" && upQueue.length > 0) {
+        setCurrentFloor((prev) => {
+          const target = upQueue[0];
 
-        if (prev === target) {
-          setQueue((prevQueue) =>
-            prevQueue.filter((floor) => floor !== target)
-          );
-          setDirection(null);
-          return prev;
-        }
+          if (prev === target) {
+            setUpQueue((q) => q.filter((f) => f !== target));
+            return prev;
+          }
 
-        const up = prev < target;
-        setDirection(up ? "up" : "down");
-        return up ? prev + 1 : prev - 1;
-      });
+          return prev + 1;
+        });
+      } else if (direction === "down" && downQueue.length > 0) {
+        setCurrentFloor((prev) => {
+          const target = downQueue[0];
+
+          if (prev === target) {
+            setDownQueue((q) => q.filter((f) => f !== target));
+            return prev;
+          }
+
+          return prev - 1;
+        });
+      }
+
+      if (direction === "up" && upQueue.length === 0 && downQueue.length > 0) {
+        setDirection("down");
+      }
+
+      if (
+        direction === "down" &&
+        downQueue.length === 0 &&
+        upQueue.length > 0
+      ) {
+        setDirection("up");
+      }
+
+      if (
+        direction === "up" &&
+        upQueue.length === 0 &&
+        downQueue.length === 0
+      ) {
+        setDirection(null);
+      }
+
+      if (
+        direction === "down" &&
+        downQueue.length === 0 &&
+        upQueue.length === 0
+      ) {
+        setDirection(null);
+      }
     };
 
     const interval = setInterval(move, 2000);
     return () => clearInterval(interval);
-  }, [queue]);
+  }, [upQueue, downQueue, direction]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[#D4C9C7] p-3 relative">
-      <div>Queue: {queue.join(', ')}</div>
-      <ElevatorButtons 
-        Addtoqueue={Addtoqueue} 
-        direction={direction} 
-        currentFloor={currentFloor}
-        queue={queue} 
-      />
-      <Building 
-        currentFloor={currentFloor}
+      <ElevatorButtons
+        Addtoqueue={Addtoqueue}
         direction={direction}
+        currentFloor={currentFloor}
+        upQueue={upQueue}
+        downQueue={downQueue}
       />
-      
-  </div>
+
+      <Building currentFloor={currentFloor} direction={direction} />
+    </div>
   );
 };
 

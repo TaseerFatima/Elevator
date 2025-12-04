@@ -104,39 +104,42 @@
 
 
 
-import React from "react";
+// import React from "react";
 
-const ElevatorButtons = ({ Addtoqueue, direction, currentFloor, queue }) => {
-  const floors = [1, 2, 3, 4, 5, 6];
+// const ElevatorButtons = ({ Addtoqueue, direction, currentFloor, queue }) => {
+//   const floors = [1, 2, 3, 4, 5, 6];
 
  
 
-  return (
-    <div className="flex flex-col gap-2 p-4">
-      {floors.map((f) => (
-        <button
-          key={f}
-          onClick={() => Addtoqueue(f)}
-          className={linkClasses(f)}
-        >
-          {f}
+//   return (
+//     <div className="flex flex-col gap-2 p-4">
+//       {floors.map((f) => (
+//         <button
+//           key={f}
+//           onClick={() => Addtoqueue(f)}
+//           className={linkClasses(f)}
+//         >
+//           {f}
           
-          {currentFloor === f && direction === "up" && (
-            <span className="ml-1">↑</span>
-          )}
+//           {currentFloor === f && direction === "up" && (
+//             <span className="ml-1">↑</span>
+//           )}
           
-          {currentFloor === f && direction === "down" && (
-            <span className="ml-1">↓</span>
-          )}
+//           {currentFloor === f && direction === "down" && (
+//             <span className="ml-1">↓</span>
+//           )}
           
-          {/* Show queued indicator for floors in queue but not current */}
-          {queue.includes(f) && currentFloor !== f && (
-            <span className="ml-1 text-xs">•</span>
-          )}
-        </button>
-      ))}
-    </div>
-  );
-};
+//           {/* Show queued indicator for floors in queue but not current */}
+//           {queue.includes(f) && currentFloor !== f && (
+//             <span className="ml-1 text-xs">•</span>
+//           )}
+//         </button>
+//       ))}
+//     </div>
+//   );
+// };
 
-export default ElevatorButtons;
+// export default ElevatorButtons;
+
+
+
