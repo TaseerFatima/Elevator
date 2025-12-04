@@ -83,7 +83,7 @@ const Layout = () => {
       }
     };
 
-    const interval = setInterval(move, 2000);
+    const interval = setInterval(move, 1500);
     return () => clearInterval(interval);
   }, [upQueue, downQueue, direction]);
 
@@ -97,7 +97,7 @@ const Layout = () => {
         downQueue={downQueue}
       />
 
-      <Building currentFloor={currentFloor} direction={direction} />
+      <Building currentFloor={currentFloor} direction={direction} Addtoqueue={Addtoqueue}/>
     </div>
   );
 };

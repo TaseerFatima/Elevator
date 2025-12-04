@@ -1,7 +1,7 @@
 import ElevatorBox from "../Floors/ElevatorBox";
 import ArrowControls from "./ArrowControls";
 
-const Floors = ({ currentFloor, direction, setCurrentFloor }) => {
+const Floors = ({ currentFloor, direction, Addtoqueue }) => {
   const FLOORS = [
     { id: 6, name: "Roof ", desc: "Outdoor terrace + penthouse suite" },
     { id: 5, name: "Residential - 5th", desc: "2 BR apartment" },
@@ -18,12 +18,11 @@ const Floors = ({ currentFloor, direction, setCurrentFloor }) => {
           key={floor.id}
           className="relative bg-[#2D383e] rounded-xl border-2 border-gray-600 shadow-md p-[15px] text-center"
         >
-            <h3 className="font-bold text-lg md:text-base text-white">{floor.name}</h3>
-            <p className="text-xs md:text-sm text-gray-400">{floor.desc}</p>
-          <ArrowControls
-            currentFloor={currentFloor}
-            setCurrentFloor={setCurrentFloor}
-          />
+          <h3 className="font-bold text-lg md:text-base text-white">
+            {floor.name}
+          </h3>
+          <p className="text-xs md:text-sm text-gray-400">{floor.desc}</p>
+          <ArrowControls floorNumber={floor.id} Addtoqueue={Addtoqueue} />
 
           {floor.id === currentFloor && <ElevatorBox direction={direction} />}
         </div>

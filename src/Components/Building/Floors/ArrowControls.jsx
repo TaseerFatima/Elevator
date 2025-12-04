@@ -1,16 +1,16 @@
 import React from "react";
 
-const ArrowControls = ({ currentFloor, setCurrentFloor }) => {
+const ArrowControls = ({ Addtoqueue,floorNumber  }) => {
   const goUp = () => {
-    if (currentFloor < 6) {
-      setCurrentFloor(currentFloor + 1);
-    }
+    
+      Addtoqueue(floorNumber);
+   
   };
 
   const goDown = () => {
-    if (currentFloor > 1) {
-      setCurrentFloor(currentFloor - 1);
-    }
+    
+      Addtoqueue(floorNumber);
+    
   };
 
   return (
