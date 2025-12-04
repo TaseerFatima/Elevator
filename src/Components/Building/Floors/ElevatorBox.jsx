@@ -10,16 +10,16 @@ const ElevatorBox = ({ direction }) => {
         <div className="w-full h-full bg-gray-600 rounded-lg flex items-center justify-center relative">
           <span className="text-white text-xs font-semibold">Elevator</span>
 
-          {direction === "up" && (
-            <div className="absolute top-1 left-1/2 -translate-x-1/2 text-green-500 text-2xl font-bold">
-              ↑
-            </div>
-          )}
-          {direction === "down" && (
-            <div className="absolute top-1 left-1/2 -translate-x-1/2 text-red-500 text-2xl font-bold">
-              ↓
-            </div>
-          )}
+       {direction === "up" && (
+          <div className="absolute top-1 left-1/2 -translate-x-1/2 text-green-500 text-2xl font-bold animate-bounce">
+            ↑
+          </div>
+        )}
+        {direction === "down" && (
+          <div className="absolute top-1 left-1/2 -translate-x-1/2 text-red-500 text-2xl font-bold animate-bounce">
+            ↓
+          </div>
+        )}
         </div>
       </div>
     </div>

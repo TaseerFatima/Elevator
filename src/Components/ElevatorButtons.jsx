@@ -9,7 +9,7 @@ const ElevatorButtons = ({ Addtoqueue, direction, currentFloor, upQueue, downQue
 
   const linkClasses = (id) => {
     let baseClasses =
-      "w-10 h-10 flex items-center  justify-center rounded-full text-white font-semibold transition-all ";
+      "w-10 h-10 flex items-center  justify-center rounded-full text-white font-semibold transition-all duration-500 ";
       baseClasses += "w-8 h-8 text-xs sm:w-10 sm:h-10 sm:text-sm md:w-12 md:h-12 md:text-base ";
 
     if (currentFloor === id) {
@@ -19,7 +19,7 @@ const ElevatorButtons = ({ Addtoqueue, direction, currentFloor, upQueue, downQue
     }
     
     if (isQueued(id)) {
-      return baseClasses + "bg-blue-500 hover:bg-blue-600";
+      return baseClasses + "bg-blue-500 hover:bg-blue-600 animate-pulse";
     }
 
     return baseClasses + "bg-gray-500 hover:bg-gray-600";
@@ -27,7 +27,7 @@ const ElevatorButtons = ({ Addtoqueue, direction, currentFloor, upQueue, downQue
 
   return (
     <div
-      className="fixed -left-64 md:bg-[#072230]   p-2 md:rounded-lg md:shadow-md md:left-auto right-6 lg:right-12 top-1/2 md:top-1/2
+      className="fixed -left-[17rem] md:bg-[#072230]   p-2 md:rounded-lg md:shadow-md md:left-auto right-6 lg:right-12 top-1/2 md:top-1/2
       -translate-y-1/2 flex items-center justify-center flex-col"
     >
       <div className="grid gap-3 md:grid-cols-2">

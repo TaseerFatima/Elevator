@@ -15,9 +15,11 @@ const Floors = ({ currentFloor, direction, Addtoqueue }) => {
     <div className="flex flex-col gap-4 w-full max-w-4xl mx-auto p-4">
       {FLOORS.map((floor) => (
         <div
-          key={floor.id}
-          className="relative bg-[#2D383e] rounded-xl border-2 border-gray-600 shadow-md p-[15px] text-center"
-        >
+  key={floor.id}
+  className={`relative bg-[#2D383e] rounded-xl border-2 border-gray-600 shadow-md p-[15px] text-center
+    ${floor.id === currentFloor ? "ring-2 ring-yellow-400 ring-offset-2 animate-pulse" : ""}`}
+>
+
           <h3 className="font-bold text-lg md:text-base text-white">
             {floor.name}
           </h3>
