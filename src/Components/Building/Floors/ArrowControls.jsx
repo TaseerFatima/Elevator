@@ -1,16 +1,12 @@
 import React from "react";
 
-const ArrowControls = ({ Addtoqueue,floorNumber  }) => {
+const ArrowControls = ({ Addtoqueue, floorNumber }) => {
   const goUp = () => {
-    
-      Addtoqueue(floorNumber);
-   
+    Addtoqueue(floorNumber);
   };
 
   const goDown = () => {
-    
-      Addtoqueue(floorNumber);
-    
+    Addtoqueue(floorNumber);
   };
 
   return (

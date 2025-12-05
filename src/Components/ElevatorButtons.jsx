@@ -13,7 +13,7 @@ const ElevatorButtons = ({ Addtoqueue, direction, currentFloor, upQueue, downQue
       baseClasses += "w-8 h-8 text-xs sm:w-10 sm:h-10 sm:text-sm md:w-12 md:h-12 md:text-base ";
 
     if (currentFloor === id) {
-      if (direction === "up") return baseClasses + "bg-green-500";
+      if (direction === "up") return baseClasses + "bg-green-500 ";
       if (direction === "down") return baseClasses + "bg-red-500";
       return baseClasses + "bg-yellow-500";
     }
@@ -39,10 +39,10 @@ const ElevatorButtons = ({ Addtoqueue, direction, currentFloor, upQueue, downQue
           >
             {f}
             {currentFloor === f && direction === "up" && (
-              <span className="text-green-200 font-bold text-lg ml-1">↓</span>
+              <span className="text-green-200 font-bold ml-1">↓</span>
             )}
             {currentFloor === f && direction === "down" && (
-              <span className="text-red-200 text-lg font-bold ml-1">↑</span>
+              <span className="text-red-200  font-bold ml-1">↑</span>
             )}
           </button>
         ))}
