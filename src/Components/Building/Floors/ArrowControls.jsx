@@ -1,19 +1,19 @@
 import React from "react";
 
-const ArrowControls = ({ Addtoqueue, floorNumber }) => {
-  const goUp = () => {
-    Addtoqueue(floorNumber);
+const ArrowControls = ({ floorNumber, onRequestElevator }) => {
+  const handleUpClick = () => {
+    onRequestElevator(floorNumber, "up");
   };
 
-  const goDown = () => {
-    Addtoqueue(floorNumber);
+  const handleDownClick = () => {
+    onRequestElevator(floorNumber, "down");
   };
 
   return (
     <div>
       <div className="absolute left-3 top-1/2 -translate-y-1/2 gap-2 h-14 w-7 flex flex-col justify-center items-center bg-gray-700 rounded-xl shadow-lg p-2">
         <button
-          onClick={goUp}
+        onClick={handleUpClick} 
           className="w-0 h-0 hover:border-b-green-700
           border-l-[10px] border-l-transparent
           border-r-[10px] border-r-transparent
@@ -21,7 +21,7 @@ const ArrowControls = ({ Addtoqueue, floorNumber }) => {
         ></button>
 
         <button
-          onClick={goDown}
+         onClick={handleDownClick} 
           className="w-0 h-0 hover:border-t-red-900
           border-l-[10px] border-l-transparent
           border-r-[10px] border-r-transparent
@@ -33,3 +33,5 @@ const ArrowControls = ({ Addtoqueue, floorNumber }) => {
 };
 
 export default ArrowControls;
+
+

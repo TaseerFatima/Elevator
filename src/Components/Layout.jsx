@@ -8,6 +8,26 @@ const Layout = () => {
   const [upQueue, setUpQueue] = useState([]);
   const [downQueue, setDownQueue] = useState([]);
 
+  const handleExternalRequest = (requestedFloor, requestedDirection) => {
+    if (requestedDirection === "up") {
+      setUpQueue((prev) =>
+        prev.includes(requestedFloor)
+          ? prev
+          : [...prev, requestedFloor].sort((a, b) => a - b)
+      );
+    } else if (requestedDirection === "down") {
+      setDownQueue((prev) =>
+        prev.includes(requestedFloor)
+          ? prev
+          : [...prev, requestedFloor].sort((a, b) => b - a)
+      );
+    }
+
+    if (!direction) {
+      setDirection(requestedDirection);
+    }
+  };
+
   const Addtoqueue = (targetFloor) => {
     if (targetFloor > currentFloor) {
       setUpQueue((prev) =>
@@ -97,7 +117,11 @@ const Layout = () => {
         downQueue={downQueue}
       />
 
-      <Building currentFloor={currentFloor} direction={direction} Addtoqueue={Addtoqueue}/>
+      <Building
+        currentFloor={currentFloor}
+        direction={direction}
+        onRequestElevator={handleExternalRequest}
+      />
     </div>
   );
 };

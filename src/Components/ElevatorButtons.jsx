@@ -42,7 +42,7 @@ const ElevatorButtons = ({ Addtoqueue, direction, currentFloor, upQueue, downQue
               <span className="text-green-200 font-bold ml-1">↓</span>
             )}
             {currentFloor === f && direction === "down" && (
-              <span className="text-red-200  font-bold ml-1">↑</span>
+              <span className="text-red-200 font-bold ml-1">↑</span>
             )}
           </button>
         ))}
