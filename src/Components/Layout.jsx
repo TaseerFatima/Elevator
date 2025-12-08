@@ -35,77 +35,53 @@ const Layout = () => {
           ? prev
           : [...prev, targetFloor].sort((a, b) => a - b)
       );
+      if (!direction) setDirection("up");
     } else if (targetFloor < currentFloor) {
       setDownQueue((prev) =>
         prev.includes(targetFloor)
           ? prev
           : [...prev, targetFloor].sort((a, b) => b - a)
       );
-    }
-
-    if (!direction) {
-      setDirection(targetFloor > currentFloor ? "up" : "down");
+      if (!direction) setDirection("down");
     }
   };
 
   useEffect(() => {
     const move = () => {
-      if (direction === "up" && upQueue.length > 0) {
-        setCurrentFloor((prev) => {
-          const target = upQueue[0];
+      let nextFloor = null;
 
-          if (prev === target) {
-            setUpQueue((q) => q.filter((f) => f !== target));
-            return prev;
-          }
-
-          return prev + 1;
-        });
-      } else if (direction === "down" && downQueue.length > 0) {
-        setCurrentFloor((prev) => {
-          const target = downQueue[0];
-
-          if (prev === target) {
-            setDownQueue((q) => q.filter((f) => f !== target));
-            return prev;
-          }
-
-          return prev - 1;
-        });
+      if (direction === "up") {
+        if (upQueue.length > 0) nextFloor = upQueue[0];
+        else if (downQueue.length > 0) {
+          setDirection("down");
+          nextFloor = downQueue[0];
+        }
+      } else if (direction === "down") {
+        if (downQueue.length > 0) nextFloor = downQueue[0];
+        else if (upQueue.length > 0) {
+          setDirection("up");
+          nextFloor = upQueue[0];
+        }
       }
 
-      if (direction === "up" && upQueue.length === 0 && downQueue.length > 0) {
-        setDirection("down");
-      }
-
-      if (
-        direction === "down" &&
-        downQueue.length === 0 &&
-        upQueue.length > 0
-      ) {
-        setDirection("up");
-      }
-
-      if (
-        direction === "up" &&
-        upQueue.length === 0 &&
-        downQueue.length === 0
-      ) {
+      if (nextFloor === null) {
         setDirection(null);
+        return;
       }
 
-      if (
-        direction === "down" &&
-        downQueue.length === 0 &&
-        upQueue.length === 0
-      ) {
-        setDirection(null);
+      if (currentFloor < nextFloor) setCurrentFloor((prev) => prev + 1);
+      else if (currentFloor > nextFloor) setCurrentFloor((prev) => prev - 1);
+      else {
+        if (direction === "up")
+          setUpQueue((q) => q.filter((f) => f !== nextFloor));
+        else if (direction === "down")
+          setDownQueue((q) => q.filter((f) => f !== nextFloor));
       }
     };
 
     const interval = setInterval(move, 1500);
     return () => clearInterval(interval);
-  }, [upQueue, downQueue, direction]);
+  }, [currentFloor, direction, upQueue, downQueue]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[#D4C9C7] p-3 relative">
